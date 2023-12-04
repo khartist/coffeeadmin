@@ -16,43 +16,35 @@
             <form @submit.prevent="submitForm">
                 <!-- CMND -->
               <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">CMND:</label>
+                <label class="block text-gray-600 text-sm font-semibold mb-2 w-24">CMND:</label>
                 <input v-model="cmnd" type="text" class="border p-2 w-full" required />
               </div>
 
                 <!-- Họ và tên -->
               <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">Họ tên:</label>
+                <label class="block text-gray-600 text-sm font-semibold mb-2 w-24">Họ tên:</label>
                 <input v-model="HVT" type="text" class="border p-2 w-full" required />
               </div>
 
               <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">Email:</label>
+                <label class="block text-gray-600 text-sm font-semibold mb-2 w-24">Email:</label>
                 <input v-model="email" type="text" class="border p-2 w-full" required />
               </div>
 
               <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">SĐT:</label>
+                <label class="block text-gray-600 text-sm font-semibold mb-2 w-24">SĐT:</label>
                 <input v-model="sdt" type="text" class="border p-2 w-full" required />
               </div>
 
               <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">Ngày sinh:</label>
+                <label class="block text-gray-600 text-sm font-semibold mb-2 w-24">Ngày sinh:</label>
                 <input v-model="bdate" type="text" class="border p-2 w-full" required />
               </div>
 
               <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">SĐT:</label>
-                <span class="inline-block w-4"></span>
-                <input v-model="sdt" type="text" class="border p-2 w-full" required />
+                <label class="block text-gray-600 text-sm font-semibold mb-2 w-24">Mã chi nhánh:</label>
+                <input v-model="mcn" type="text" class="border p-2 w-full" required />
               </div>
-
-              <div class="mb-4 flex items-center">
-                <label class="block text-gray-600 text-sm font-semibold mb-2">SĐT:</label>
-                <span class="inline-block w-4"></span>
-                <input v-model="sdt" type="text" class="border p-2 w-full" required />
-              </div>
-  
               <!-- Repeat similar structure for other input fields -->
   
               <div class="mt-4">
