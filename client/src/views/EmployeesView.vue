@@ -1,3 +1,3 @@
 <template>
-    <div>Employee View</div>
+    <div>Tính năng sắp mở</div>
 </template>

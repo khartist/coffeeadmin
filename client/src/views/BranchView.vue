@@ -1,3 +1,3 @@
 <template>
-    <div>Branch View</div>
+    <div>Tính năng sắp mở</div>
 </template>

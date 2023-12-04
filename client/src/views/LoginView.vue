@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="">
       <div class="bg-gray-200 p-4 grid place-items: center">
         <a class="text-red-900 text-center">Đắng Coffee</a>
@@ -19,32 +19,54 @@
               <i class="bx bx-lock"></i>
             </div>
             <div class="grid place-items:center">
-                <button @click = "verify" type="button" class="rounded-md my-1 py-2 px-4 text-red-900 bg-blue-500">Login</button>
+                <button type="submit" class="rounded-md my-1 py-2 px-4 text-red-900 bg-blue-500">Login</button>
             </div>
           </div>
         </form>
       </div>
     </div>
+</template> -->
+
+<template>
+  <div class="min-h-screen flex items-center justify-center bg-gray-200">
+    <div class="bg-white p-8 rounded shadow-md w-96">
+      <h2 class="text-2xl font-bold mb-4 text-gray-800">Đắng Cafe</h2>
+      <p class="text-sm text-gray-600 mb-4">Chào mừng bạn quay lại!</p>
+      <form @submit.prevent="login">
+        <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-gray-600 mb-2">Tên đăng nhập:</label>
+          <input v-model="username" type="text" id="username" name="username" class="w-full border p-2 rounded focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-600 mb-2">Mật khẩu:</label>
+          <input v-model="password" type="password" id="password" name="password" class="w-full border p-2 rounded focus:outline-none focus:border-blue-500">
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+          Đăng nhập
+        </button>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                uName: "",
-                pwd: ""
-            }
-        },
-        methods: {
-            verify() {
-                alert(uName+" asjkdbaskjdaskjdak" + pwd)
-                if (this.uName ==="sManager" && this.pwd ==="sManager") {
-                    //this.$router.push({name: 'home'});
-                    alert("success!");
-                } else {
-                    alert('Wrong username or password');
-                }
-            }
-        }
-    }
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  methods: {
+    login() {
+      if (this.username === 'admin' && this.password === 'admin') {
+        this.$router.push({ path: '/home' });
+      } else {
+        alert('Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin đăng nhập.');
+      }
+    },
+  },
+};
 </script>
