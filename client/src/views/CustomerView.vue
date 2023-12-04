@@ -2,13 +2,14 @@
     <div>
         <div class="flex items-center justify-between">
             <h3 class="text-2xl font-bold text-left py-2">Danh sách khách hàng</h3>
-            <button
+            <!-- <button
             class="px-5 p-1.5 rounded bg-gray-600 font-bold text-white  hover:bg-gray-300 hover:text-gray-600  transition duration-400 ease-in-out"
             type="button"
             @click="Create"
             >
                 Thêm khách hàng
-            </button>
+            </button> -->
+            <add-customer-modal></add-customer-modal>
         </div>
         <div class="overflow-x-auto relative  sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -76,12 +77,16 @@
     </div>
   </template>
   
-  <script>
-  export default {
-  
-  }
-  </script>
-  
-  <style>
-  
-  </style>
+<script>
+import AddCustomerModal from '../components/AddCustomerModal.vue';
+
+export default {
+    components: {
+        AddCustomerModal,
+    }
+};
+</script>
+
+<style>
+
+</style>
