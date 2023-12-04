@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Navigation from '../views/master/navigation.vue'
 import HomeView from '../views/HomeView.vue'
 import CustomerView from '../views/CustomerView.vue'
 import BranchView from '../views/BranchView.vue'
@@ -9,29 +10,36 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
+            name: 'Navigation',
             path: '/',
+            component: Navigation,
+            children: [
+               {
+                name: 'home',
+                path: '/home',
+                component:HomeView
+              },
+              {
+                name: 'customer',
+                path: '/customer',
+                component:CustomerView
+              },
+              {
+                name: 'branches',
+                path: '/branches',
+                component:BranchView
+              },
+              {
+                name: 'employees',
+                path: '/employees',
+                component:EmployeesView
+              }
+            ]
+        },
+        {
+            path: '/login',
             name:'login',
             component: LoginView
-        },
-        {
-            path:'/',
-            name:'home',
-            component: HomeView
-        },
-        {
-            path:'/customer',
-            name:'customer',
-            component: CustomerView
-        },
-        {
-            path:'/branches',
-            name:'branches',
-            component: BranchView
-        },
-        {
-            path:'/employees',
-            name:'employees',
-            component: EmployeesView
         }
     ]
 })
