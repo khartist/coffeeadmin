@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 const KhachHangController = require('../controllers/KhachHangController');
 
-router.post('/', KhachHangController.create);
+router.post('/create', KhachHangController.create);
 router.get('/list', KhachHangController.showAll);
 router.delete('/delete/:id', KhachHangController.delete);
 router.put('/update/:id', KhachHangController.update);
