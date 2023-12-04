@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CustomerView from '../views/CustomerView.vue'
 import BranchView from '../views/BranchView.vue'
 import EmployeesView from '../views/EmployeesView.vue'
-
+import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
