@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.username === 'admin' && this.password === 'admin') {
+      if (this.username === 'sManager' && this.password === 'admin2003') {
         this.$router.push({ path: '/home' });
       } else {
         alert('Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin đăng nhập.');

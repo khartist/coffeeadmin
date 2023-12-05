@@ -5,6 +5,15 @@
             <button @click="Create" class="px-5 p-1.5 rounded bg-gray-600 font-bold text-white  hover:bg-gray-300 hover:text-gray-600  transition duration-400 ease-in-out">
                 Thêm Khách hàng
             </button>
+            <div class="flex items-center px-5 p-1.5 rounded bg-gray-600 font-bold text-white">
+                <label class="mr-2">Sắp xếp theo Mã chi nhánh:</label>
+                <!-- Dropdown -->
+                <select class="text-gray-600" v-model="selectedSortOption" @change="sortCustomers">
+                    <option v-for="option in sortByOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                    </option>
+                </select>   
+            </div>
             <!-- <add-customer-modal></add-customer-modal> -->
         </div>
         <div class="overflow-x-auto relative  sm:rounded-lg">
@@ -48,16 +57,32 @@
                         </svg>
                     </button>
                     <span class="inline-block w-4"></span>
-                    <button @click="Delete(item.CMND)" class=" border-gray-200 hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
+                    <button @click="openDeleteModal(item.CMND)" class="border-gray-200 hover:bg-gray-300 hover:text-gray-800 transition duration-400 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                         </svg>
                     </button>
+                    <!-- <button @click="Delete(item.CMND)" class=" border-gray-200 hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
+                        
+                    </button> -->
                     
                 </tr>
                     
             </tbody>
             </table>
+        </div>
+
+        <div v-if="showModal" class="fixed inset-0 overflow-y-auto">
+            <div class="flex items-center justify-center min-h-screen">
+                <div class="bg-gray-600 p-8 w-1/2 rounded">
+                    <p class="text-2xl font-bold mb-4 text-white">Bạn có chắc chắn muốn xóa?</p>
+                    <div class="mt-4">
+                            <button @click="cancelDelete" class="ml-2 text-white">Hủy</button>
+                            <span class="inline-block w-4"></span>
+                            <button @click="confirmDelete" class="bg-gray-900 text-white py-2 px-4 rounded">Xóa</button>
+                        </div>
+                </div>
+            </div>
         </div>
 
         <div v-if="isModalOpen" id="customersModal" class="fixed inset-0 overflow-y-auto">
@@ -143,7 +168,14 @@ export default {
             },
             modal: null,
             isModalOpen: false,
+            showModal: false,
+            customerToDelete: null,
             rating: null,
+            sortByOptions: [
+                { label: "Sắp xếp tăng dần", value: "ascending" },
+                { label: "Sắp xếp giảm dần", value: "descending" },
+            ],
+            selectedSortOption: "ascending",
         };
     },
     mounted(){
@@ -272,6 +304,27 @@ export default {
                 isMaChiNhanhValid &&
                 isLoaiTheValid
             );
+        },
+        sortCustomers() {
+            if (this.selectedSortOption === "ascending") {
+                this.customers.sort((a, b) => a.MaChiNhanh.localeCompare(b.MaChiNhanh));
+            } else {
+                this.customers.sort((a, b) => b.MaChiNhanh.localeCompare(a.MaChiNhanh));
+            }
+        },
+        openDeleteModal(CMND) {
+            this.showModal = true;
+            this.customerToDelete = CMND;
+            },
+        cancelDelete() {
+            this.showModal = false;
+            this.customerToDelete = null;
+        },
+        async confirmDelete() {
+            await axios.delete(`http://localhost:3000/khachhang/delete/${this.customerToDelete}`);
+            await this.getCustomer();
+            this.showModal = false;
+            this.customerToDelete = null;
         },
     },
 }

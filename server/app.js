@@ -18,8 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: 'Quang@1802',
+  user: 'sManager',
+  password: 'admin2003',
+  // user: 'root',
+  // password: 'Quang@1802',
   database: 'INTERNET_CAFE'
 })
 
@@ -151,4 +153,6 @@ app.get('/khachhang/rating/:id', (req, res) => {
     res.json({avgRating});
   })
 })
+
+app.get('/khachhang/sort/')
 
