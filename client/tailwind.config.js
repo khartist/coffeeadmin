@@ -6,6 +6,13 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'sans': ['ui-sans-serif', 'Arial'],
+      'serif': ['ui-serif', 'Arial'],
+      'mono': ['ui-monospace', 'Arial'],
+      'display': ['Arial'],
+      'body': ['"Arial"'],
+    }
   },
   plugins: [],
 }

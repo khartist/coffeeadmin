@@ -49,11 +49,11 @@ app.get('/khachhang', (req, res) => {
 // create new khach hang
 app.use(express.json())
 app.post('/khachhang/create', (req, res) => {
-  const { CMND, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe, MaThe} = req.body;
+  const { CMND, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe} = req.body;
   const sql = `
-    SELECT insert_khach_hang(?, ?, ?, ?, ?, ?, ?, ?);
+    SELECT insert_khach_hang(?, ?, ?, ?, ?, ?, ?);
   `;
-  const values = [CMND, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe, MaThe];
+  const values = [CMND, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe];
 
   connection.query(sql, values, (err, results) => {
     if (err) {
@@ -109,13 +109,13 @@ app.delete('/khachhang/delete/:id', (req, res) => {
 //update 
 app.put('/khachhang/update/:id', (req, res) => {
   const customerId = req.params.id; // Assuming the customer ID is stored as a parameter in the URL path
-  const {CMND, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, MaThe, LoaiThe} = req.body;
+  const {HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe} = req.body;
 
   // Perform validation and error handling as needed
 
   // Execute the SQL query to update the customer
-  const sql = 'SELECT update_khach_hang(?, ?, ?, ?, ?, ?, ?, ?)';
-  const values = [CMND, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe, MaThe];
+  const sql = 'SELECT update_khach_hang(?, ?, ?, ?, ?, ?, ?)';
+  const values = [customerId, HoVaTen, Email, SDT, NgaySinh, MaChiNhanh, LoaiThe];
   connection.query(sql, values, (err, results) => {
     if (err) {
       console.error('Error executing the query:', err);
@@ -135,7 +135,7 @@ app.put('/khachhang/update/:id', (req, res) => {
 //get avg khach hang ratings
 app.get('/khachhang/rating/:id', (req, res) => {
   const customerId = req.params.id;
-  const sql = 'SELECT GetAverageRating_KH(?)';
+  const sql = 'SELECT GetAverageRating_KH(?) AS avgRating';
   connection.query(sql, [customerId], (err, results) => {
     if (err) {
       console.error('Error executing the query:', err);
@@ -147,7 +147,7 @@ app.get('/khachhang/rating/:id', (req, res) => {
       res.status(404).json({ error: 'Value not found' });
       return;
     }
-    const avgRating = results[0]
+    const avgRating = results[0].avgRating;
     res.json({avgRating});
   })
 })
